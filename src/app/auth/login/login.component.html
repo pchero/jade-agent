@@ -1,0 +1,15 @@
+<div id="fullscreen_bg" class="fullscreen_bg">
+
+<div class="container">
+
+	<form class="form-signin">
+    <h1 class="form-signin-heading">Sign In</h1>
+		<input type="text" name="username" [(ngModel)]="username" class="form-control" placeholder="Username" required="" autofocus="">
+		<input type="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Password" required="">
+		<button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login_handler()">
+			Sign In
+		</button>
+	</form>
+
+</div>
+</div>

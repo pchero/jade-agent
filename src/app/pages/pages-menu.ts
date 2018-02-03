@@ -12,6 +12,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
+    title: 'Auth-custom',
+    icon: 'nb-keypad',
+    link: '/pages/auth',
+    children: [
+      {
+        title: 'Login',
+        link: '/pages/auth/login',
+      },
+    ],
+  },
+  {
     title: 'UI Features',
     icon: 'nb-keypad',
     link: '/pages/ui-features',
