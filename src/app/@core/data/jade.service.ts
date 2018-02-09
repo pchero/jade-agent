@@ -110,7 +110,7 @@ export class JadeService {
   // router: Router;
 
   constructor(private http: Http, private route: Router) {
-    // console.log('Fired JadeService constructor.');
+    console.log('Fired JadeService constructor.');
 
     // this.init_database();
     // this.init_websock();
