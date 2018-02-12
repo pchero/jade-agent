@@ -110,10 +110,13 @@ export class JadeService {
   // router: Router;
 
   constructor(private http: Http, private route: Router) {
-    // console.log('Fired JadeService constructor.');
+    console.log('Fired JadeService constructor.');
 
     // this.init_database();
     // this.init_websock();
+
+    this.get_item('/me/info');
+    console.log("Logged in.");
   }
 
 
@@ -156,9 +159,22 @@ export class JadeService {
     if (target === null) {
       return null;
     }
-
     const target_encode = encodeURI(target);
-    return this.http.get(this.baseUrl + target_encode, {params: param}).map(res => res.json());
+    const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
+
+    return this.http.get(url, {params: param}).map(res => res.json())
+    .subscribe(
+      (data) => {
+        return data;
+      },
+      (err) => {
+        this.route.navigate(['/auth/login']);
+      },
+    )
+
+    // this.route.navigate(['/auth/login']);
+
+    // return this.http.get(url, {params: param}).map(res => res.json());
   }
 
   private create_item(target, j_data) {

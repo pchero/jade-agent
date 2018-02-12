@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { JadeService } from '../../@core/data/jade.service';
+
 
 @Component({
   selector: 'ngx-dashboard',
@@ -6,4 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
+  constructor(private service: JadeService) {
+  }
 }
