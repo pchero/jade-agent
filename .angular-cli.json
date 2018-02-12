@@ -42,6 +42,7 @@
         "../node_modules/tinymce/plugins/table/plugin.min.js",
         "./assets/vendors/echarts.min.js",
         "./assets/vendors/echarts.world.min.js",
+        "./assets/vendors/SIPml-api.js",
         "../node_modules/chart.js/dist/Chart.min.js"
       ],
       "environmentSource": "environments/environment.ts",

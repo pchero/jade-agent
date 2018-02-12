@@ -1,6 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { JadertcService } from './jadertc.service';
 import { JadeService } from './jade.service';
 import { UserService } from './users.service';
 import { ElectricityService } from './electricity.service';
@@ -15,6 +16,7 @@ const SERVICES = [
   SmartTableService,
   PlayerService,
   JadeService,
+  JadertcService,
 ];
 
 @NgModule({
