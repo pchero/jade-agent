@@ -16,17 +16,17 @@ export class LoginComponent implements OnInit {
   password: string;
 
   constructor(private service: JadeService) {
-    console.log('Fired UserComponent.');
+    console.log('Fired LoginComponent.');
   }
 
   login_handler() {
-    console.log("Fired login_handler. " + this.username + ", " + this.password);
+    console.log('Fired login_handler. ' + this.username + ', ' + this.password);
     let ret;
-    this.service.login(this.username, this.password);
-    // console.log("Login return. " + ret);
-    // if (ret === true) {
-    //   this.router.navigate(['/pages/dashboard']);
-    // }
+    ret = this.service.login(this.username, this.password);
+    console.log('Login return. ' + ret);
+    if (ret === true) {
+      this.router.navigate(['/pages/dashboard']);
+    }
     return;
   }
 
