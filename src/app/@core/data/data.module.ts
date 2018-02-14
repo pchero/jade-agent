@@ -5,7 +5,6 @@ import { JadertcService } from './jadertc.service';
 import { JadeService } from './jade.service';
 import { JadesipService } from './jade-sip.service';
 import { JadeuserService } from './jade-user.service';
-import { NotificationsService } from './notifications.service';
 
 import { UserService } from './users.service';
 import { ElectricityService } from './electricity.service';
@@ -23,7 +22,6 @@ const SERVICES = [
   JadertcService,
   JadeuserService,
   JadesipService,
-  NotificationsService,
 ];
 
 @NgModule({

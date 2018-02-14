@@ -5,7 +5,7 @@ import { UA, WebSocketInterface, RTCSession } from 'jssip';
 import 'rxjs/add/operator/map';
 import {Observable, Subscriber} from 'rxjs/Rx';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
-import { NotificationsService } from './notifications.service';
+import { JadenotificationComponent } from './jade-notification.component';
 
 @Injectable()
 export class JadesipService {
@@ -17,11 +17,28 @@ export class JadesipService {
   private localStream = null;
   private calls = [];
 
-  constructor(private notification: NotificationsService) {
-    console.log("Fired JadesipService.");
-    // this.phones = [];
+  private notify;
 
+  constructor() {
+    console.log("Fired JadesipService.");
     this.wsock = new WebSocketInterface(this.wsuri);
+  }
+
+  set_notify(notify) {
+    this.notify = notify;
+  }
+
+  show_notification(type, title, body) {
+    const toast: Toast = {
+      type: type,
+      title: title,
+      body: body,
+      timeout: 5000,
+      showCloseButton: true,
+      bodyOutputType: BodyOutputType.TrustedHtml,
+    };
+
+    this.notify.popAsync(toast);
   }
 
   login_phone(uri: string, password: string) {
@@ -55,32 +72,14 @@ export class JadesipService {
     ua.on('registrationExpiring', (e) => this.on_registrationexpiring(e));
     ua.on('unregistered', (e) => this.on_unregistered(e));
 
-    // ua.on('accepted', (e) => this.on_accepted(e));
-    // ua.on('connected', (e) => this.on_connected(e));
-    // ua.on('connecting', (e) => this.on_connecting(e));
-    // ua.on('disconnected', (e) => this.on_disconnected(e));
-    // ua.on('ended', (e) => this.on_ended(e));
-    // ua.on('failed', (e) => this.on_failed(e));
-    // ua.on('hold', (e) => this.on_hold(e));
-    // ua.on('newDTMF', (e) => this.on_newdtmf(e));
-    // ua.on('newRTCSession', (e) => this.on_newrtcsession(e));
-    // ua.on('progress', (e) => this.on_progress(e));
-    // ua.on('registered', (e) => this.on_registered(e));
-    // ua.on('unregistered', (e) => this.on_unregistered(e));
-    // ua.on('unhold', (e) => this.on_unhold(e));
-    // ua.on('update', (e) => this.on_update(e));
-
-
     ua.start();
     this.ua = ua;
-
-    // this.phones.push(ua);
   }
 
 
   private on_connected(e) {
     console.log("Fired on_connected");
-    this.notification.showToast('info', 'hi', 'hihi');
+    this.show_notification('info', 'Phone connected', 'Your phone has been connected to the server.');
   }
 
   private on_disconnected(e) {
@@ -89,10 +88,13 @@ export class JadesipService {
 
   private on_newmessage(e) {
     console.log("Fired on_newmessage.");
+    this.show_notification('info', 'Message', "You've got a message.");
   }
 
   private on_newrtcsession(e) {
     console.log("Fired on_newrtcsession.");
+    this.show_notification('info', "Call", 'Some one calling you.');
+
     const call = new Call(e.session);
 
     this.calls.push(call);
@@ -100,10 +102,14 @@ export class JadesipService {
 
   private on_registered(e) {
     console.log("Fired on_registered.");
+    this.show_notification('info', "Phone registered", 'Your phone has been registered.');
+
   }
 
   private on_unregistered(e) {
     console.log("Fired on_unregistered.");
+    this.show_notification('info', "Phone unregistered", 'Your phone has been unregistered.');
+
   }
 
   private on_registrationfailed(e) {
