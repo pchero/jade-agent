@@ -5,8 +5,8 @@ import { Injectable, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable, Subscriber} from 'rxjs/Rx';
 import { JadertcService } from './jadertc.service';
-// import { RequestOptions } from '@angular/http/src/base_request_options';
-// import * as TAFFY from 'taffy';
+import { JadesipService } from './jade-sip.service';
+import { JadeuserService } from './jade-user.service';
 
 @Injectable()
 export class JadeService {
@@ -19,7 +19,7 @@ export class JadeService {
   private webrtcs: Array<any>;
   // private webrtcs: [];
 
-  constructor(private http: Http, private route: Router) {
+  constructor(private http: Http, private route: Router, private user: JadeuserService) {
     console.log('Fired JadeService constructor.');
 
     // this.init_database();
@@ -193,29 +193,31 @@ export class JadeService {
       (data) => {
         console.log(data);
 
+        this.user.set_userinfo(data.result);
+
         // set userinfo
         this.userinfo = data.result;
         console.log(this.userinfo);
 
-        // webrtc login
-        for (let i = 0; i < data.result.contacts.length; i++) {
-          const contact = data.result.contacts[i];
+        // // webrtc login
+        // for (let i = 0; i < data.result.contacts.length; i++) {
+        //   const contact = data.result.contacts[i];
 
-          const webrtc = new JadertcService()
-          webrtc.sipRegister(
-            // contact.info.realm,
-            // contact.info.id,
-            // contact.info.public_url,
-            "asterisk.org",
-            "rtcagent-01",
-            "sip:rtcagent-01@192.168.200.14",
-            "rtcagent-01",
-            // contact.info.password,
-            // contact.name
-            this.websock_ast,
-          );
-          this.webrtcs.push(webrtc);
-        }
+        //   const webrtc = new JadertcService()
+        //   webrtc.sipRegister(
+        //     // contact.info.realm,
+        //     // contact.info.id,
+        //     // contact.info.public_url,
+        //     "asterisk.org",
+        //     "rtcagent-01",
+        //     "sip:rtcagent-01@192.168.200.14",
+        //     "rtcagent-01",
+        //     // contact.info.password,
+        //     // contact.name
+        //     this.websock_ast,
+        //   );
+        //   this.webrtcs.push(webrtc);
+        // }
       },
       (err) => {
         console.log('Could not get data correctly. Move to the login.');
