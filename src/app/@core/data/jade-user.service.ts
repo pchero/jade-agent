@@ -9,7 +9,7 @@ import { JadesipService } from './jade-sip.service';
 
 @Injectable()
 export class JadeuserService {
-  private user_info;
+  private user_info: any;
 
   constructor(private sips: JadesipService) {
     console.log('Fired JadeuserService constructor.');
@@ -19,6 +19,10 @@ export class JadeuserService {
     this.user_info = user;
 
     this.register_sipphones()
+  }
+
+  get_userinfo() {
+    return this.user_info;
   }
 
   register_sipphones() {

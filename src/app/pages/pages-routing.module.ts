@@ -11,6 +11,9 @@ const routes: Routes = [{
     path: 'dashboard',
     component: DashboardComponent,
   }, {
+    path: 'call',
+    loadChildren: './call/call-routing.module#CallRoutingModule',
+  }, {
     path: 'phone',
     loadChildren: './phone/phone-routing.module#PhoneRoutingModule',
   }, {

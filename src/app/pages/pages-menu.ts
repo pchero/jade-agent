@@ -8,8 +8,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Phone',
+    title: 'Call',
     icon: 'fa fa-phone',
-    link: '/pages/phone',
+    link: '/pages/call',
   },
+  // {
+  //   title: 'Phone',
+  //   icon: 'fa fa-phone',
+  //   link: '/pages/phone',
+  // },
 ];

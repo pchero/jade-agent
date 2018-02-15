@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
   templateUrl: './login.component.html',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   private router: Router;
 
@@ -30,6 +30,4 @@ export class LoginComponent implements OnInit {
     return;
   }
 
-  ngOnInit() {
-  }
 }

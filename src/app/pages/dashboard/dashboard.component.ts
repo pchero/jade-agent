@@ -11,6 +11,6 @@ export class DashboardComponent {
   private user_info: any;
 
   constructor(private service: JadeService) {
-    this.user_info = this.service.init_userinfo();
+    this.user_info = this.service.get_meinfo();
   }
 }

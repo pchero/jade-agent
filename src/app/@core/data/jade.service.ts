@@ -14,8 +14,7 @@ export class JadeService {
   private websockUrl: string = 'ws://' + window.location.hostname + ':8083';
   private websock_ast: string = 'wss://' + window.location.hostname + ':8089/ws';
 
-  private authtoken: string = null;
-  private userinfo: any = null;
+  private authtoken: string = '';
   private webrtcs: Array<any>;
   // private webrtcs: [];
 
@@ -74,111 +73,76 @@ export class JadeService {
 
     delete this.webrtcs;
     this.webrtcs = new Array;
-
-    delete this.userinfo;
-    this.userinfo = null;
   }
 
-  // private get_item(target, param = null) {
-  //   if (this.authtoken === null) {
-  //     console.log("Could not get authtoken info.");
-  //     this.route.navigate(['/auth/login']);
-  //     return null;
-  //   }
+  private is_loggedin() {
+    if (this.authtoken !== '') {
+      return true;
+    }
+    console.log("Not logged in. Move to login page.");
 
-  //   return this._get_item(target, param);
-  // }
-
-  // private _get_item(target, param = null) {
-  //   if (target === null) {
-  //     return null;
-  //   }
-  //   const target_encode = encodeURI(target);
-  //   const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
-
-  //   return this.http.get(url, {params: param}).map(res => res.json())
-  //   .subscribe(
-  //     (data) => {
-  //       return data;
-  //     },
-  //     (err) => {
-  //       console.log('Could not get data correctly. Move to the login.');
-  //       this.route.navigate(['/auth/login']);
-  //       return null;
-  //     },
-  //   )
-  // }
+    this.route.navigate(['/auth/login']);
+    return false;
+  }
 
   private get_item(target, param = null): Observable<any> {
     if (target === null) {
       return null;
     }
+
+    if (this.is_loggedin() === false) {
+      return null;
+    }
+
     const target_encode = encodeURI(target);
     const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
 
     return this.http.get(url, {params: param}).map(res => res.json());
   }
 
-
-
-  private create_item(target, j_data) {
+  private create_item(target, j_data): Observable<any> {
     if (target == null) {
-      return false;
+      return null;
+    }
+    if (this.is_loggedin() === false) {
+      return null;
     }
 
     const target_encode = encodeURI(target);
+    const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
 
-    // create data
-    this.http.post(this.baseUrl + target_encode, j_data).map(res => res.json())
-    .subscribe(
-      (data) => {
-        return true;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-        return false;
-      },
-    );
+    // send request
+    return this.http.post(url + target_encode, j_data).map(res => res.json());
   }
 
-  private update_item(target, j_data) {
+  private update_item(target, j_data): Observable<any> {
     if (target == null) {
-      return false;
+      return null;
+    }
+    if (this.is_loggedin() === false) {
+      return null;
     }
 
     const target_encode = encodeURI(target);
+    const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
 
-    // update data
-    this.http.put(this.baseUrl + target_encode, j_data).map(res => res.json())
-    .subscribe(
-      (data) => {
-        return true;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-        return false;
-      },
-    );
+    // send data
+    return this.http.put(url + target_encode, j_data).map(res => res.json());
   }
 
-  private delete_item(target) {
+  private delete_item(target): Observable<any> {
     if (target === null) {
-      return false;
+      return null;
+    }
+    if (this.is_loggedin() === false) {
+      return null;
     }
 
     const target_encode = encodeURI(target);
+    const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
 
     // delete data
-    this.http.delete(this.baseUrl + target_encode).map(res => res.json())
-    .subscribe(
-      (data) => {
-        return true;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-        return false;
-      },
-    );
+    return this.http.delete(url + target_encode).map(res => res.json());
   }
 
   OnInit() {
@@ -186,42 +150,27 @@ export class JadeService {
     // console.log('BaseUrl: ' + this.baseUrl);
   }
 
-  init_userinfo() {
+  get_meinfo() {
 
-    console.log('Fired init_userinfo.');
-    this.get_item('/me/info').subscribe(
+    console.log('Fired get_meinfo.');
+    const tmp = this.get_item('/me/info');
+    if (!tmp) {
+      return null;
+    }
+
+    tmp.subscribe(
       (data) => {
         console.log(data);
 
         this.user.set_userinfo(data.result);
 
-        // set userinfo
-        this.userinfo = data.result;
-        console.log(this.userinfo);
-
-        // // webrtc login
-        // for (let i = 0; i < data.result.contacts.length; i++) {
-        //   const contact = data.result.contacts[i];
-
-        //   const webrtc = new JadertcService()
-        //   webrtc.sipRegister(
-        //     // contact.info.realm,
-        //     // contact.info.id,
-        //     // contact.info.public_url,
-        //     "asterisk.org",
-        //     "rtcagent-01",
-        //     "sip:rtcagent-01@192.168.200.14",
-        //     "rtcagent-01",
-        //     // contact.info.password,
-        //     // contact.name
-        //     this.websock_ast,
-        //   );
-        //   this.webrtcs.push(webrtc);
-        // }
+        return data.result;
       },
       (err) => {
         console.log('Could not get data correctly. Move to the login.');
         this.route.navigate(['/auth/login']);
+
+        return null;
       },
     );
   }
