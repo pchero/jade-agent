@@ -1,3 +1,5 @@
+
+import { ListComponent } from './list/list.component';
 import { CallComponent } from './call.component';
 
 import { ThemeModule } from './../../@theme/theme.module';
@@ -14,6 +16,7 @@ const routes: Routes = [{
 
 const routedComponents = [
   CallComponent,
+  ListComponent,
 ]
 
 @NgModule({

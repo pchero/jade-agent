@@ -10,7 +10,7 @@ import { JadeUserService } from './jade-user.service';
 
 @Injectable()
 export class JadeService {
-  private baseUrl: string = 'http://' + window.location.hostname + ':8081';
+  private baseUrl: string = 'https://' + window.location.hostname + ':8081';
   private websockUrl: string = 'ws://' + window.location.hostname + ':8083';
   private websock_ast: string = 'wss://' + window.location.hostname + ':8089/ws';
 

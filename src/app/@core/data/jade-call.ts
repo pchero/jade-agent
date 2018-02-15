@@ -87,10 +87,16 @@ export class Call {
 
   private on_connecting(e) {
     console.log("Fired on_connecting");
+
+    if (this.session.connection.getLocalStreams().length > 0) {
+      this.localStream = this.session.connection.getLocalStreams()[0];
+    }
   }
 
   private on_ended(e) {
     console.log("Fired on_ended.");
+
+    this.status = 'finished';
   }
 
   private on_failed(e) {

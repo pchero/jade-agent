@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-import { JadeService } from '../../@core/data/jade.service';
-
-import { ListComponent } from './list/list.component';
+import { JadeUserService } from '../../../@core/data/jade-user.service';
 
 @Component({
-  selector: 'ngx-app-call',
-  templateUrl: './call.component.html',
+  selector: 'ngx-app-call-list',
+  templateUrl: './list.component.html',
 })
-export class CallComponent {
+export class ListComponent {
 
   queues_detail: any;
   queues_detail_member: string;
@@ -16,7 +14,9 @@ export class CallComponent {
   global: any;
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: JadeService) {
+  constructor(private user: JadeUserService) {
+    const calls = user.get_calls();
+
   }
 
   detail_update_handler() {
