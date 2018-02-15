@@ -20,12 +20,7 @@ export class JadeService {
 
   constructor(private http: Http, private route: Router, private user: JadeUserService) {
     console.log('Fired JadeService constructor.');
-
-    // this.init_database();
-    // this.init_websock();
-
-    // this.get_item('/me/info');
-    console.log("Logged in.");
+    this.get_meinfo();
   }
 
   login(username, password): Observable<boolean> {
@@ -46,6 +41,8 @@ export class JadeService {
           console.log(data);
           this.authtoken = data.result.authtoken;
           console.log('Logged in.');
+
+          this.get_meinfo();
 
           this.route.navigate(['/pages/dashboard']);
           // return true;
@@ -150,7 +147,7 @@ export class JadeService {
     // console.log('BaseUrl: ' + this.baseUrl);
   }
 
-  get_meinfo() {
+  private get_meinfo() {
 
     console.log('Fired get_meinfo.');
     const tmp = this.get_item('/me/info');

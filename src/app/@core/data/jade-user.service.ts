@@ -40,6 +40,11 @@ export class JadeUserService {
     return this.phone.get_calls();
   }
 
+  get_call(id) {
+    console.log("Fired user.get_call. " + id);
+    return this.phone.get_call(id);
+  }
+
   register_sipphones() {
     // we support only 1 phone per user now.
     const contact = this.user_info.contacts[0];

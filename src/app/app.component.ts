@@ -10,7 +10,9 @@ import { AnalyticsService } from './@core/utils/analytics.service';
 @Component({
   selector: 'ngx-app',
   template: `
-    <router-outlet></router-outlet>
+    <router-outlet>
+      <audio id="remote_sound" autoplay="true"></audio>
+    </router-outlet>
   `,
 })
 export class AppComponent implements OnInit {

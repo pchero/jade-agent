@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { JadeService } from './@core/data/jade.service';
+import { JadeUserService } from './@core/data/jade-user.service';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
+    JadeService,
+    JadeUserService,
   ],
 })
 export class AppModule {

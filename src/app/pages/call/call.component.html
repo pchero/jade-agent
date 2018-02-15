@@ -1,8 +1,36 @@
+<audio id="remote_sound_tmp" autoplay="true"></audio>
+
+
 <nb-card>
+  <nb-card-header>
+    Call list
+  </nb-card-header>
   <nb-card-body>
-  body test
+    <ng2-smart-table
+      [settings]="list_settings"
+      [source]="list_source"
+      (deleteConfirm)="list_onDeleteConfirm($event)"
+      (rowSelect)="list_onRowSelect($event)"
+    >
+    </ng2-smart-table>  
   </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
+    Call detail
+  </nb-card-header>
+
+  <nb-card-body>
+    <textarea rows="30" readonly="true" [(ngModel)]="detail" placeholder="Configuration" class="form-control" style="white-space:pre; font-family:monospace"></textarea>
+  </nb-card-body>
+
+  <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-success" (click)="detail_bt_answer()">Answer</button>
+      <button class="btn btn-success" (click)="detail_bt_hangup()">Hangup</button>
+    </div>
+  </nb-card-footer>
 
 </nb-card>
 
-<ngx-app-call-list></ngx-app-call-list>

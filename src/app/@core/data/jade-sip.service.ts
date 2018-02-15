@@ -60,6 +60,19 @@ export class JadeSipService {
     return this.calls;
   }
 
+  get_call(id) {
+
+    console.log("Fired get_call. " + id);
+    for (let i = 0; i < this.calls.length; i++) {
+      const call = this.calls[i];
+      if (call.id === id) {
+        return call;
+      }
+    }
+
+    return null;
+  }
+
   delete_finished_calls() {
     this.calls = this.calls.filter(function(c) {
       return c.status !== 'finished';
