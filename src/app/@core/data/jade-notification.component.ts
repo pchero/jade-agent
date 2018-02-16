@@ -6,7 +6,7 @@ import {ToasterContainerComponent, ToasterService} from 'angular2-toaster';
   selector: 'ngx-core-notifications',
   template: '<toaster-container></toaster-container>',
 })
-export class JadenotificationComponent {
+export class JadeNotificationComponent {
   private toasterService: ToasterService
 
   constructor() {

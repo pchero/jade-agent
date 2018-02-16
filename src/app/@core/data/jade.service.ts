@@ -5,8 +5,8 @@ import { Injectable, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable, Subscriber} from 'rxjs/Rx';
 import { JadertcService } from './jadertc.service';
-import { JadesipService } from './jade-sip.service';
-import { JadeuserService } from './jade-user.service';
+import { JadeSipService } from './jade-sip.service';
+import { JadeUserService } from './jade-user.service';
 
 @Injectable()
 export class JadeService {
@@ -18,7 +18,7 @@ export class JadeService {
   private webrtcs: Array<any>;
   // private webrtcs: [];
 
-  constructor(private http: Http, private route: Router, private user: JadeuserService) {
+  constructor(private http: Http, private route: Router, private user: JadeUserService) {
     console.log('Fired JadeService constructor.');
 
     // this.init_database();

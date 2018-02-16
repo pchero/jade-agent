@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { JadertcService } from './jadertc.service';
 import { JadeService } from './jade.service';
-import { JadesipService } from './jade-sip.service';
-import { JadeuserService } from './jade-user.service';
+import { JadeSipService } from './jade-sip.service';
+import { JadeUserService } from './jade-user.service';
 
 import { UserService } from './users.service';
 import { ElectricityService } from './electricity.service';
@@ -20,8 +20,8 @@ const SERVICES = [
   PlayerService,
   JadeService,
   JadertcService,
-  JadeuserService,
-  JadesipService,
+  JadeUserService,
+  JadeSipService,
 ];
 
 @NgModule({

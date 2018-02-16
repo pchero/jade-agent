@@ -4,14 +4,21 @@ import { Router } from '@angular/router';
 import { Injectable, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable, Subscriber} from 'rxjs/Rx';
-import { JadesipService } from './jade-sip.service';
+import { JadeSipService } from './jade-sip.service';
 
+import { Call } from './jade-call';
+import { JadeNotificationComponent } from './jade-notification.component';
 
 @Injectable()
-export class JadeuserService {
+export class JadeUserService {
   private user_info: any;
 
-  constructor(private sips: JadesipService) {
+  private notificaiton: JadeNotificationComponent;
+
+  private phone: JadeSipService;
+  private calls: Array<Call>;
+
+  constructor() {
     console.log('Fired JadeuserService constructor.');
   }
 
@@ -25,11 +32,27 @@ export class JadeuserService {
     return this.user_info;
   }
 
+  set_notificaiton(notification) {
+    this.notificaiton = notification;
+  }
+
+  get_calls() {
+    return this.phone.get_calls();
+  }
+
   register_sipphones() {
-    for (let i = 0; i < this.user_info.contacts.length; i++) {
-      const contact = this.user_info.contacts[i];
-      this.sips.login_phone(contact.info.public_url, contact.info.password);
-    }
+    // we support only 1 phone per user now.
+    const contact = this.user_info.contacts[0];
+
+    this.phone = new JadeSipService();
+    this.phone.set_notify(this.notificaiton);
+    this.phone.login_phone(contact.info.public_url, contact.info.password);
+
+
+    // for (let i = 0; i < 1; i++) {
+    //   const contact = this.user_info.contacts[i];
+    //   this.sips.login_phone(contact.info.public_url, contact.info.password);
+    // }
   }
 
 }

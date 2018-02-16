@@ -3,7 +3,8 @@ import { MENU_ITEMS } from './pages-menu';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
-import { JadesipService } from '../@core/data/jade-sip.service';
+import { JadeUserService } from '../@core/data/jade-user.service';
+
 
 import 'style-loader!angular2-toaster/toaster.css';
 
@@ -32,12 +33,12 @@ export class PagesComponent {
 
   constructor(
     private toasterService: ToasterService,
-    private jadesipService: JadesipService
+    private user: JadeUserService,
   ) {
     this.toasterService = toasterService;
     this.init_toaster();
 
-    this.jadesipService.set_notify(this.toasterService);
+    this.user.set_notificaiton(this.toasterService);
   }
 
   init_toaster() {
