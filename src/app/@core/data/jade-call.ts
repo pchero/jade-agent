@@ -67,14 +67,31 @@ export class Call {
     return this.session;
   }
 
+  private set_remote_audio(stream) {
+    console.log("Fired set_localstream")
+    this.remote_audio = new Audio();
+    this.remote_audio.srcObject = stream;
+    this.remote_audio.volume = 1.0;
+    this.remote_audio.play();
+  }
+
   private on_accepted(e) {
-    console.log("Fired on_accepted.");
+    console.log("Fired on_accepted. "
+    + "localstream:" + this.session.connection.getLocalStreams().length
+    + ", remotestream:" + this.session.connection.getRemoteStreams().length);
 
     this.status = 'active';
 
+    //
     if (this.session.connection.getLocalStreams().length > 0) {
-      console.log("Setting stream..");
+      console.log("Setting local stream.");
       this.localStream = this.session.connection.getLocalStreams()[0];
+    }
+
+    // set remote audio
+    if (this.session.connection.getRemoteStreams().length > 0) {
+      console.log("Setting remote stream.")
+      this.set_remote_audio(this.session.connection.getRemoteStreams()[0]);
     }
 
     if (e.originator === 'remote') {
@@ -102,10 +119,10 @@ export class Call {
 
     this.session.connection.onaddstream = function (e) {
       console.log("Fired onaddstream.");
-      this.remote_audio = new Audio();
-      this.remote_audio.srcObject = e.stream;
-      this.remote_audio.volume = 1.0;
-      this.remote_audio.play();
+      // this.remote_audio = new Audio();
+      // this.remote_audio.srcObject = e.stream;
+      // this.remote_audio.volume = 1.0;
+      // this.remote_audio.play();
     }
 
     this.session.connection.onconnectionstatechange = function (e) {

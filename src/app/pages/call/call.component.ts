@@ -10,6 +10,7 @@ export class CallComponent {
   detail: any;
   detail_call: any;
   list_source: LocalDataSource = new LocalDataSource();
+  destination: string;
 
   constructor(private user: JadeUserService) {
 
@@ -21,6 +22,11 @@ export class CallComponent {
     }
 
     this.list_source.load(calls);
+  }
+
+  originate_bt_call() {
+    console.log("Fired originate_bt_call. destination:" + this.destination);
+    this.user.create_call(this.destination);
   }
 
   list_onRowSelect(event) {

@@ -1,5 +1,21 @@
 <nb-card>
   <nb-card-header>
+    Call originate
+  </nb-card-header>
+  <nb-card-body>
+    <div class="input-group">
+      <input type="text" class="form-control" [(ngModel)]="destination" placeholder="Call to..">
+      <span class="input-group-btn">
+        <button class="btn btn-success" (click)="originate_bt_call()">
+          Call
+        </button>
+      </span>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
     Call list
   </nb-card-header>
   <nb-card-body>

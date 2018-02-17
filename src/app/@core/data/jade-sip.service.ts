@@ -118,6 +118,16 @@ export class JadeSipService {
     this.ua = ua;
   }
 
+  originate(destination: string) {
+    console.log("Fired originate. destination:" + destination);
+    this.ua.call(
+      destination,
+      {
+        mediaConstraints: {'audio': true, 'video': false },
+        rtcOfferConstraints: { offerToReceiveAudio: 1, offerToReceiveVideo: 0 }
+      }
+    );
+  }
 
   private on_connected(e) {
     console.log("Fired on_connected");

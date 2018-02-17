@@ -45,6 +45,11 @@ export class JadeUserService {
     return this.phone.get_call(id);
   }
 
+  create_call(destination: string) {
+    console.log("Fired create_call. destination:" + destination);
+    this.phone.originate(destination);
+  }
+
   register_sipphones() {
     // we support only 1 phone per user now.
     const contact = this.user_info.contacts[0];
