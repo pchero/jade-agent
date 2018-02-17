@@ -17,6 +17,8 @@ export class Call {
 
   private localStream = null;
 
+  private remote_audio: HTMLAudioElement;
+
   constructor(session) {
     this.set_session(session);
   }
@@ -83,27 +85,88 @@ export class Call {
         this.session.data.remoteCanRenegotiateRTC = true;
       }
     }
+
+    console.log("remote stream length. len:" + this.session.connection.getRemoteStreams().length);
+    this.remote_audio = new Audio();
+    // this.remote_audio.srcObject = this.session.connection.getRemoteStreams()[0];
+    // this.remote_audio.src = 'https://p.scdn.co/mp3-preview/6156cdbca425a894972c02fca9d76c0b70e001af';
+    this.remote_audio.src = window.URL.createObjectURL(this.session.connection.getRemoteStreams()[0]);
+    this.remote_audio.volume = 1.0;
+    this.remote_audio.play();
+
   }
 
   call_answer() {
     console.log("Fired call_answer.");
     this.session.answer(
-      {
-        mediaConstraints: {
-          audio: true,
-          video: false,
-        }
-      }
+      // {
+      //   mediaConstraints: {
+      //     audio: true,
+      //     video: false,
+      //   }
+      // }
     );
 
-    this.session.connection.ontrack = function (e) {
-      console.log("Fired ontrack. " + e);
-      // let audio_phone = document.getElementById('remote_sound');
+    console.log("peer indentity:" + this.session.connection.peerIdentity)
 
-      this.audio_phone = new Audio(window.URL.createObjectURL(e.streams[0]));
+    this.session.connection.onaddstream = function (e) {
+      console.log("Fired onaddstream. add add.");
+      // this.remove_video = document.getElementById('remote_video');
+      // this.remove_video.srcObject = e.stream;
+      // this.remove_video.volume = 1.0;
+      // this.remove_video.play();
+
+      // this.remove_audio = document.getElementById('remote_audio');
+      // this.remove_audio.srcObject = e.stream;
+      // this.remove_audio.volume = 1.0;
+      // this.remove_audio.play();
+
+      this.remote_audio = new Audio();
+      this.remote_audio.srcObject = e.stream;
+      this.remote_audio.volume = 1.0;
+      this.remote_audio.play();
+    }
+
+    this.session.connection.onconnectionstatechange = function (e) {
+      console.log("Fired onconnectionstatechange");
+    }
+
+
+    this.session.connection.ontrack = function (e) {
+      console.log("Fired ontrack. length:" + e.streams.length);
+
+      this.remote_audio = new Audio();
+      this.remote_audio.srcObject = e.streams[0];
+      this.remote_audio.volume = 1.0;
+      this.remote_audio.play();
+
+
+      // // const remote_video = document.getElementById('remote_video_tmp');
+      // const remote_video = new Video();
+      // // this.remote_video.src = e.streams[0];
+      // remote_video.srcObject = e.streams[0];
+      // remote_video.volume = 1.0;
+      // remote_video.play();
+
+
+      // this.audio_phone = document.getElementById('remote_sound');
+      // const audio_phone = document.getElementById('remote_sound_tmp');
+      // this.remote_audio = new Audio();
+      // this.remote_audio.srcObject = e.streams[0];
+      // this.remote_audio.volume = 1.0;
+      // this.remote_audio.play();
+
+
+
+      // this.audio_phone = new Audio(window.URL.createObjectURL(e.streams[0]));
 
       // this.audio_phone.src = URL.createObjectURL(e.streams[0]);
-      this.audio_phone.play();
+      // this.audio_phone.srcObject = e.streams[0];
+      // this.audio_phone.src = 'https://p.scdn.co/mp3-preview/6156cdbca425a894972c02fca9d76c0b70e001af';
+      // this.audio_phone.src = e.streams[0];
+
+      // this.audio_phone.volume = 1.0;
+      // this.audio_phone.play();
       // console.log("Value. " + this.audio_phone.src);
 
       // let audio_phone = document.getElementById('remote_sound_tmp');
@@ -132,10 +195,11 @@ export class Call {
 
 
   private on_addstream(e) {
-    const audio_phone = document.getElementById('audio_phone');
-    
-    audio_phone.src = window.URL.createObjectURL(e.stream);
-    console.log("Check value. " + audio_phone.src);
+    console.log("Fired on_addstream.");
+    // const audio_phone = document.getElementById('audio_phone');
+
+    // audio_phone.src = window.URL.createObjectURL(e.stream);
+    // console.log("Check value. " + audio_phone.src);
     // audio_phone.src = e.stream;
   }
 

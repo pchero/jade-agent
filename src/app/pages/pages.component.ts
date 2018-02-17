@@ -22,6 +22,8 @@ import 'style-loader!angular2-toaster/toaster.css';
       <nb-menu [items]="menu"></nb-menu>
       <router-outlet>
         <toaster-container [toasterconfig]="toaster_config"></toaster-container>
+        <audio id="remote_audio" autoplay="true"></audio>
+        <video id="remote_video" autoplay="true" width="0" height="0"></video>
       </router-outlet>
     </ngx-sample-layout>
   `,

@@ -11,7 +11,6 @@ import { AnalyticsService } from './@core/utils/analytics.service';
   selector: 'ngx-app',
   template: `
     <router-outlet>
-      <audio id="remote_sound" autoplay="true"></audio>
     </router-outlet>
   `,
 })
