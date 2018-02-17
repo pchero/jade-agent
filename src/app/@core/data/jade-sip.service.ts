@@ -27,6 +27,7 @@ export class JadeSipService {
   constructor() {
     console.log("Fired JadesipService.");
     this.wsock = new WebSocketInterface(this.wsuri);
+    this.wsock.via_transport = "wss";
   }
 
   set_notify(notify) {
@@ -98,7 +99,9 @@ export class JadeSipService {
       use_preloaded_route: false,
       hack_via_tcp: false,
       hack_via_ws: false,
-      hack_ip_in_contact: false
+      hack_ip_in_contact: false,
+
+      user_agent: 'jade_agent-0.0.1'
     }
 
     const ua = new UA(config);
@@ -132,7 +135,7 @@ export class JadeSipService {
 
   private on_newrtcsession(e) {
     console.log("Fired on_newrtcsession.");
-    this.show_notification('info', "Call", 'Some one calling you.');
+    this.show_notification('info', "Call", 'Someone calling you.');
 
     const call = new Call(e.session);
 

@@ -47,28 +47,24 @@ export class CallComponent {
       add: false,
       edit: false,
       delete: false,
-      columnTitle: null,
+      columnTitle: '',
     },
     columns: {
       type: {
-        title: null,
+        title: 'Type',
         type: 'string',
-        filter: false,
       },
       from: {
-        title: null,
+        title: 'From',
         type: 'string',
-        filter: false,
       },
       to: {
-        title: null,
+        title: 'To',
         type: 'string',
-        filter: false,
       },
       status: {
-        title: null,
+        title: 'Status',
         type: 'string',
-        filter: false,
       },
     },
   }
