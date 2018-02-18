@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { JadeUserService } from '../../@core/data/jade-user.service';
+import { JadeService } from '../../@core/data/jade.service';
 
 @Component({
   selector: 'ngx-app-call',
@@ -12,7 +13,7 @@ export class CallComponent {
   list_source: LocalDataSource = new LocalDataSource();
   destination: string;
 
-  constructor(private user: JadeUserService) {
+  constructor(private user: JadeUserService, private jade: JadeService) {
 
     const calls = user.get_calls();
 

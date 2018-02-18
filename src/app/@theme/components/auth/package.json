@@ -1,0 +1,65 @@
+{
+  "_from": "@nebular/auth@2.0.0-rc.4",
+  "_id": "@nebular/auth@2.0.0-rc.4",
+  "_inBundle": false,
+  "_integrity": "sha512-+2/qedeNkLHt1tKjQ57LUDZYOJoyjDRlIipQ+S7Hj8k8aCpLW6S8tuUvtlcobVn2M7+Cn1vj3CYGaNYCgrz2SA==",
+  "_location": "/@nebular/auth",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@nebular/auth@2.0.0-rc.4",
+    "name": "@nebular/auth",
+    "escapedName": "@nebular%2fauth",
+    "scope": "@nebular",
+    "rawSpec": "2.0.0-rc.4",
+    "saveSpec": null,
+    "fetchSpec": "2.0.0-rc.4"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@nebular/auth/-/auth-2.0.0-rc.4.tgz",
+  "_shasum": "59628209426a8788e86a4d6a7cb5e85c918206dd",
+  "_spec": "@nebular/auth@2.0.0-rc.4",
+  "_where": "/home/pchero/git/jade-admin",
+  "author": {
+    "name": "akveo"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/nebular/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "@nebular/auth",
+  "homepage": "https://github.com/akveo/nebular#readme",
+  "keywords": [
+    "angular",
+    "typescript",
+    "ng2-admin",
+    "ngx-admin",
+    "theme",
+    "auth",
+    "login",
+    "register",
+    "nebular"
+  ],
+  "license": "MIT",
+  "main": "./bundles/auth.umd.js",
+  "module": "./index.js",
+  "name": "@nebular/auth",
+  "peerDependencies": {
+    "@angular/common": "^5.1.0",
+    "@angular/core": "^5.1.0",
+    "@angular/router": "^5.1.0",
+    "@angular/forms": "^5.1.0",
+    "@angular/http": "^5.1.0",
+    "@nebular/theme": "2.0.0-rc.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akveo/nebular.git"
+  },
+  "typings": "./index.d.ts",
+  "version": "2.0.0-rc.4"
+}

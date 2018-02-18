@@ -8,6 +8,7 @@ import { JadeSipService } from './jade-sip.service';
 
 import { Call } from './jade-call';
 import { JadeNotificationComponent } from './jade-notification.component';
+import { JadeService } from './jade.service';
 
 @Injectable()
 export class JadeUserService {

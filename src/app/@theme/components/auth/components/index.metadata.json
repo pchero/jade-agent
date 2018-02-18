@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./auth.component"},{"from":"./auth-block/auth-block.component"},{"from":"./login/login.component"},{"from":"./logout/logout.component"},{"from":"./register/register.component"},{"from":"./request-password/request-password.component"},{"from":"./reset-password/reset-password.component"}]}]

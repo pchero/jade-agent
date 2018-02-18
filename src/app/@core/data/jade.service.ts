@@ -20,7 +20,11 @@ export class JadeService {
 
   constructor(private http: Http, private route: Router, private user: JadeUserService) {
     console.log('Fired JadeService constructor.');
-    this.get_meinfo();
+
+    if (this.authtoken === '') {
+      this.route.navigate(['/auth/login']);
+    }
+    // this.get_meinfo();
   }
 
   login(username, password): Observable<boolean> {
