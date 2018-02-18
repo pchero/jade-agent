@@ -1,18 +1,18 @@
 {
-  "name": "ngx-admin",
-  "version": "2.0.2",
+  "name": "jade-agent",
+  "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akveo/ngx-admin.git"
+    "url": "git+https://github.com/pchero/jade-agent.git"
   },
   "bugs": {
-    "url": "https://github.com/akveo/ngx-admin/issues"
+    "url": "https://github.com/pchero/jade-agent/issues"
   },
   "scripts": {
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
-    "start": "ng serve --live-reload true --host 0.0.0.0 --port 4201",
+    "start": "ng serve --live-reload true --host 0.0.0.0 --port 4201 --ssl 1 --ssl-key ./jade-agent.pem --ssl-cert ./jade-agent.pem",
     "build": "ng build",
     "build:prod": "npm run build -- --prod --aot",
     "test": "ng test -sr",
