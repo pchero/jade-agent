@@ -12,7 +12,10 @@ $ npm start
 ## Demo
 You can try it at here.
 
-http://project.pchero21.com/jade-agent/
+ID: admin
+Password: admin
+
+https://project.pchero21.com/jade-agent/
 
 [![Screen Preview](./jade-agent.png)](./jade-agent.png)
 
