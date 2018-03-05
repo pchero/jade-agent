@@ -57,13 +57,8 @@ export class JadeUserService {
 
     this.phone = new JadeSipService();
     this.phone.set_notify(this.notificaiton);
-    this.phone.login_phone(contact.info.public_url, contact.info.password);
 
-
-    // for (let i = 0; i < 1; i++) {
-    //   const contact = this.user_info.contacts[i];
-    //   this.sips.login_phone(contact.info.public_url, contact.info.password);
-    // }
+    this.phone.login_phone(contact.info.id, contact.info.password);
   }
 
 }

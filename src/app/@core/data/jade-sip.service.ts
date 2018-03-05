@@ -81,8 +81,9 @@ export class JadeSipService {
   }
 
 
-  login_phone(uri: string, password: string) {
-    console.log("Fired login_phone. uri: " + uri, ", password: " + password);
+  login_phone(id: string, password: string) {
+    const uri = 'sip:' + id + '@' + window.location.hostname;
+    console.log("Fired login_phone. id: " + id, ", password: " + password + ", uri: " + uri);
 
     const config = {
       sockets: [this.wsock],
